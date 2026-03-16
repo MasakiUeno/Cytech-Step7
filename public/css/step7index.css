@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 16px;
+}
+
+.form-container {
+    border: 1px solid #000;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px
+}
+
+.search-bar input {
+    width: 200px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    margin: 20px
+}
+
+.search-bar select {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding-left: 8px;
+    font-size: 14px;
+    margin: 20px
+}
+
+.search-bar button {
+    width: 60px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.button-new {
+    background-color: orange;
+    border: none;
+    color: #000;
+    padding: 6px 18px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.button-detail {
+    background-color: #00b6f0;
+    color: #000;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 12px;
+    margin-right: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.button-delete {
+    background-color: #f03e3e;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 200px;
+}
+
+thead th {
+    height: 36px;
+    border-bottom: 1px solid #aaa;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 8px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+td {
+    padding: 8px 8px;
+    vertical-align: middle;
+}
