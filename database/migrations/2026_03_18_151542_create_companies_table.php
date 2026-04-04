@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->string('price');
-            $table->string('stock');
-            $table->string('maker');
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('companies');
     }
 };

@@ -12,43 +12,47 @@
     <h1>商品新規登録画面</h1>
     
     <div class="form-container">
-        <form>
+        <form action="{{ route('store') }}" method="POST">
+        @csrf
             <div class="form-group">
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
-                <input type="text" class="form-input" required>
+                <input type="text" name="name" class="form-input" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     メーカー名<span class="required">*</span>
                 </label>
-                <div class="form-input-wrapper">
-                    <input type="text" class="form-input" required>
-                    <span class="dropdown-icon"></span>
-                </div>
+                <select name="company_id" class="form-input" required>
+                @foreach ($companies as $company)
+                <option value="{{ $company->id }}">
+                {{ $company->name }}
+                </option>
+                @endforeach
+                </select>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     価格<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" required>
+                <input type="number" name="price" class="form-input" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     在庫数<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" required>
+                <input type="number" name="stock" class="form-input" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     コメント
                 </label>
-                <input type="text" class="form-input">
+                <input type="text" name="comment" class="form-input">
             </div>
 
             <div class="form-group">

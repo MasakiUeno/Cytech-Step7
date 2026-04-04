@@ -17,7 +17,7 @@
                 <label class="form-label">
                     ID
                 </label>
-                <input type="text" class="form-input" value="{{ $article->id }}" readonly>
+                <input type="text" class="form-input" value="{{ $product->id }}" readonly>
             </div>
 
             <div class="form-group image-preview-group">
@@ -25,7 +25,7 @@
                     商品画像
                 </label>
                 <div class="image-preview">
-                <img src="{{ asset('storage/'.$article->image) }}" class="product-image">
+                <img src="{{ asset('storage/'.$product->image) }}" class="product-image">
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <label class="form-label">
                     商品名
                 </label>
-                <input type="text" class="form-input" value="{{ $article->name }}" readonly>
+                <input type="text" class="form-input" value="{{ $product->name }}" readonly>
             </div>
 
             <div class="form-group">
@@ -41,7 +41,7 @@
                     メーカー名
                 </label>
                 <div class="form-input-wrapper">
-                <input type="text" class="form-input" value="{{ $article->maker }}" readonly>
+                <input type="text" class="form-input" value="{{ $product->maker }}" readonly>
                     <span class="dropdown-icon"></span>
                 </div>
             </div>
@@ -50,25 +50,25 @@
                 <label class="form-label">
                     価格
                 </label>
-                <input type="text" class="form-input" value="￥{{ $article->price }}" readonly>
+                <input type="text" class="form-input" value="￥{{ $product->price }}" readonly>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     在庫数
                 </label>
-                <input type="number" class="form-input" value="{{ $article->stock }}" readonly>
+                <input type="number" class="form-input" value="{{ $product->stock }}" readonly>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     コメント
                 </label>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" value="{{ $product->comment }}">
             </div>
 
             <div class="button-group">
-            <a href="{{ route('edit',$article->id) }}">
+            <a href="{{ route('edit',$product->id) }}">
                 <button type="button" class="btn-register">編集</button>
             </a>
                 <a href="{{ route('index') }}">

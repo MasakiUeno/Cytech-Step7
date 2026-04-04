@@ -12,20 +12,20 @@
     <h1>商品情報編集画面</h1>
     
     <div class="form-container">
-        <form action="{{ route('update',$article->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('update',$product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
                 <label class="form-label">
                     ID.<span class="required">*</span>
                 </label>
-                <input type="text" class="form-input" value="{{ $article->id }}" readonly>
+                <input type="text" class="form-input" value="{{ $product->id }}" readonly>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
-                <input type="text" class="form-input" name="maker" value="{{ $article->maker }}" required>
+                <input type="text" class="form-input" name="name" value="{{ $product->maker }}" required>
             </div>
 
             <div class="form-group">
@@ -33,7 +33,7 @@
                     メーカー名<span class="required">*</span>
                 </label>
                 <div class="form-input-wrapper">
-                <input type="text" class="form-input" name="maker" value="{{ $article->maker }}" required>
+                <input type="text" class="form-input" name="maker" value="{{ $product->maker }}" required>
                     <span class="dropdown-icon"></span>
                 </div>
             </div>
@@ -42,21 +42,21 @@
                 <label class="form-label">
                     価格<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" name="price" value="{{ $article->price }}" required>
+                <input type="number" class="form-input" name="price" value="{{ $product->price }}" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     在庫数<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" name="stock" value="{{ $article->stock }}" required>
+                <input type="number" class="form-input" name="stock" value="{{ $product->stock }}" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">
                     コメント
                 </label>
-                <input type="text" class="form-input" name="comment" value="{{ $article->comment }}">
+                <input type="text" class="form-input" name="comment" value="{{ $product->comment }}">
             </div>
 
             <div class="form-group">
@@ -71,7 +71,7 @@
 
             <div class="button-group">
                 <button type="submit" class="btn-register">更新</button>
-                <a href="{{ route('show',$article->id) }}">
+                <a href="{{ route('show',$product->id) }}">
                 <button type="button" class="btn-back">戻る</button>
                 </a>
             </div>

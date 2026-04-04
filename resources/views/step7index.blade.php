@@ -12,16 +12,27 @@
     <h1>商品一覧画面</h1>
 
     <div>
+    <form method="GET" action="{{ route('index') }}">
         <div class="search-bar input">
-            <input type="text" placeholder="検索キーワード">
-            <select class="search-bar select">
+            <input type="text" name="keyword" placeholder="検索キーワード" value="{{ $keyword ?? '' }}">
+            <select name="maker" class="search-bar select">
                 <option value="">メーカー名</option>
-                <option value="コカ・コーラ">コカ・コーラ</option>
-                <option value="サントリー">サントリー</option>
-                <option value="キリン">キリン</option>
+
+                @foreach ($companies as $company)
+                <option value="{{ $company->id }}"
+                {{ ($maker == $company->id) ? 'selected' : '' }}>
+                {{ $company->name }}
+                </option>
+                @endforeach
+
+                @if ($products->count() === 0)
+                <p>該当する商品がありません</p>
+                @endif
+
             </select>
             <button type="submit" class="search-bar button">検索</button>
         </div>
+    </form>
 
         <div class="form-container">
             <table>
@@ -41,19 +52,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($articles as $article)
-                    <tr style="background-color: #ccc;">
-                        <td>{{ $article->id }}</td>
+                @foreach ($products as $index => $product)
+                    <tr style="background-color: {{ $index % 2 == 0 ? '#ccc' : '#fff' }};">
+                        <td>{{ $product->id }}</td>
                         <td>商品画像</td>
-                        <td>{{ $article->name }}</td>
-                        <td>{{ $article->price }}</td>
-                        <td>{{ $article->stock }}</td>
-                        <td>{{ $article->maker }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->company->maker }}</td>
                         <td>
-                        <a href="{{ route('show',$article->id) }}">
+                        <a href="{{ route('show',$product->id) }}">
                             <button class="button-detail">詳細</button>
                         </a>
-                            <button class="button-delete">削除</button>
+                        <form action="{{ route('destroy', $product->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="button-delete"onclick="return confirm('本当に削除しますか？')">削除</button>
+                        </form>
                         </td>
                     </tr>
                 @endforeach
@@ -62,10 +77,7 @@
         </div>
     </div>
 
-    <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <a href="#" style="padding: 5px 10px; border: 1px solid #ccc; text-decoration: none; color: black;">&lt;</a>
-        <a href="#" style="padding: 5px 10px; border: 1px solid #ccc; text-decoration: none; color: black;">1</a>
-        <a href="#" style="padding: 5px 10px; border: 1px solid #ccc; text-decoration: none; color: black;">2</a>
-        <a href="#" style="padding: 5px 10px; border: 1px solid #ccc; text-decoration: none; color: black;">&gt;</a>
+    <div style="margin-top: 20px;">
+    {{ $products->appends(request()->query())->links() }}
     </div>
 </body>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Product;
+use App\Models\Company;
 
 class ArticleController extends Controller
 {
@@ -12,58 +13,89 @@ class ArticleController extends Controller
         $keyword = $request->keyword;
         $maker = $request->maker;
 
-        $query = Article::query();
+        $query = Product::query();
 
         if(!empty($keyword)){
             $query->where('name','like','%'.$keyword.'%');
         }
 
         if(!empty($maker)){
-            $query->where('maker',$maker);
+            $query->where('company_id',$maker);
         }
 
-        $articles = $query->paginate(5);
+        $products = $query->paginate(5);
 
-        return view('step7index',compact('articles','keyword','maker'));
+        $companies = Company::all();
+
+        return view('step7index',compact('products','keyword','maker','companies'));
     }
     //商品一覧画面
 
     public function creat() 
     {
-        return view('step7creat');
+        $companies = Company::all();
+        return view('step7creat', compact('companies'));
     }
     //商品新規登録画面
 
     public function show($id) 
     {
-        $article = Article::find($id);
+        $product = Product::find($id);
 
-        return view('step7show',compact('article'));
+        return view('step7show',compact('product'));
     }
     //商品情報詳細画面
 
     public function edit($id) 
     {
-        $article = Article::find($id);
+        $products = Product::find($id);
 
-        return view('step7edit',compact('article'));
+        return view('step7edit',compact('product'));
     }
     //商品情報編集画面
 
     public function update(Request $request,$id)
     {
 
-        $article = Article::find($id);
+        $product = product::find($id);
 
-        $article->name = $request->name;
-        $article->maker = $request->maker;
-        $article->price = $request->price;
-        $article->stock = $request->stock;
-        $article->comment = $request->comment;
+        $product->name = $request->name;
+        $product->company_id = $request->company_id;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->comment = $request->comment;
         
-        $article->save();
+        $product->save();
         return redirect()->route('show',$id);
     }
     //editの内容を更新する処理
+
+    public function store(Request $request)
+    {
+        $product = new product();
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->company_id = $request->company_id;
+        $product->comment = $request->comment;
+    
+        $product->save();
+
+        return redirect()->route('index')->with('success', '登録しました');
+    }
+    //新規登録更新
+
+    public function destroy($id)
+    {
+        $product = product::find($id);
+
+        if ($product) 
+        {
+            $product->delete();
+        }
+        return redirect()->route('index')->with('success', '削除しました');
+    }
+    //一覧から削除する処理
 
 }
