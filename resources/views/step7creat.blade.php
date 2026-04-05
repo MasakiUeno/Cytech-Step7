@@ -18,7 +18,7 @@
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
-                <input type="text" name="name" class="form-input" required>
+                <input type="text" name="product_name" class="form-input" required>
             </div>
 
             <div class="form-group">
@@ -28,7 +28,7 @@
                 <select name="company_id" class="form-input" required>
                 @foreach ($companies as $company)
                 <option value="{{ $company->id }}">
-                {{ $company->name }}
+                {{ $company->company_name }}
                 </option>
                 @endforeach
                 </select>

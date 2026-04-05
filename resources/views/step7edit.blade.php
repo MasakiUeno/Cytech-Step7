@@ -25,7 +25,7 @@
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
-                <input type="text" class="form-input" name="name" value="{{ $product->maker }}" required>
+                <input type="text" class="form-input" name="product_name" value="{{ $product->product_name }}" required>
             </div>
 
             <div class="form-group">
@@ -33,7 +33,14 @@
                     メーカー名<span class="required">*</span>
                 </label>
                 <div class="form-input-wrapper">
-                <input type="text" class="form-input" name="maker" value="{{ $product->maker }}" required>
+                <select name="company_id" class="form-input" required>
+                @foreach ($companies as $company)
+                <option value="{{ $company->id }}"
+                {{ $product->company_id == $company->id ? 'selected' : '' }}>
+                {{ $company->company_name }}
+                </option>
+                @endforeach
+                </select>
                     <span class="dropdown-icon"></span>
                 </div>
             </div>

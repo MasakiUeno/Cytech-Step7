@@ -33,7 +33,7 @@
                 <label class="form-label">
                     商品名
                 </label>
-                <input type="text" class="form-input" value="{{ $product->name }}" readonly>
+                <input type="text" class="form-input" value="{{ $product->product_name }}" readonly>
             </div>
 
             <div class="form-group">
@@ -41,7 +41,14 @@
                     メーカー名
                 </label>
                 <div class="form-input-wrapper">
-                <input type="text" class="form-input" value="{{ $product->maker }}" readonly>
+                    <select class="form-input" disabled>
+                        @foreach($companies as $company)
+                        <option value="{{ $company->id }}"
+                        {{ $product->company_id == $company->id ? 'selected' : '' }}>
+                        {{ $company->company_name }}
+                        </option>
+                        @endforeach
+                    </select>
                     <span class="dropdown-icon"></span>
                 </div>
             </div>
@@ -64,7 +71,7 @@
                 <label class="form-label">
                     コメント
                 </label>
-                <input type="text" class="form-input" value="{{ $product->comment }}">
+                <input type="text" class="form-input" value="{{ $product->comment }}"readonly>
             </div>
 
             <div class="button-group">

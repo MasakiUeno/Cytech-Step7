@@ -21,7 +21,7 @@
                 @foreach ($companies as $company)
                 <option value="{{ $company->id }}"
                 {{ ($maker == $company->id) ? 'selected' : '' }}>
-                {{ $company->name }}
+                {{ $company->company_name }}
                 </option>
                 @endforeach
 
@@ -56,10 +56,10 @@
                     <tr style="background-color: {{ $index % 2 == 0 ? '#ccc' : '#fff' }};">
                         <td>{{ $product->id }}</td>
                         <td>商品画像</td>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->product_name }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->stock }}</td>
-                        <td>{{ $product->company->maker }}</td>
+                        <td>{{ $product->company->company_name }}</td>
                         <td>
                         <a href="{{ route('show',$product->id) }}">
                             <button class="button-detail">詳細</button>

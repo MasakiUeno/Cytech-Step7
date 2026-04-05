@@ -16,7 +16,7 @@ class ArticleController extends Controller
         $query = Product::query();
 
         if(!empty($keyword)){
-            $query->where('name','like','%'.$keyword.'%');
+            $query->where('product_name','like','%'.$keyword.'%');
         }
 
         if(!empty($maker)){
@@ -41,25 +41,27 @@ class ArticleController extends Controller
     public function show($id) 
     {
         $product = Product::find($id);
+        $companies = Company::all();
 
-        return view('step7show',compact('product'));
+        return view('step7show',compact('product','companies'));
     }
     //商品情報詳細画面
 
-    public function edit($id) 
+    public function edit($id)
     {
-        $products = Product::find($id);
+        $product = Product::find($id);
+        $companies = Company::all();
 
-        return view('step7edit',compact('product'));
+        return view('step7edit',compact('product','companies'));
     }
     //商品情報編集画面
 
     public function update(Request $request,$id)
     {
 
-        $product = product::find($id);
+        $product = Product::find($id);
 
-        $product->name = $request->name;
+        $product->product_name = $request->product_name;
         $product->company_id = $request->company_id;
         $product->price = $request->price;
         $product->stock = $request->stock;
@@ -74,7 +76,7 @@ class ArticleController extends Controller
     {
         $product = new product();
 
-        $product->name = $request->name;
+        $product->product_name = $request->product_name;
         $product->price = $request->price;
         $product->stock = $request->stock;
         $product->company_id = $request->company_id;
@@ -88,7 +90,7 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
 
         if ($product) 
         {
