@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Company;
 
-class ArticleController extends Controller
+class ProductController extends Controller
 {
     public function index(Request $request) 
     {

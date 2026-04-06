@@ -9,8 +9,8 @@ class Company extends Model
 {
     use HasFactory;
 
-    public function articles()
+    public function Products()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Product::class);
     }
 }
