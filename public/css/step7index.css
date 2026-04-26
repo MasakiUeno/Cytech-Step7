@@ -102,3 +102,20 @@ td {
     padding: 8px 8px;
     vertical-align: middle;
 }
+
+td:last-child {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+form {
+    margin: 0;
+}
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}

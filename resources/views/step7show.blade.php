@@ -25,7 +25,7 @@
                     商品画像
                 </label>
                 <div class="image-preview">
-                <img src="{{ asset('storage/'.$product->image) }}" class="product-image">
+                <img src="{{ asset('storage/'.$product->img_path) }}" class="product-image">
                 </div>
             </div>
 

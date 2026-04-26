@@ -26,6 +26,9 @@
                     商品名<span class="required">*</span>
                 </label>
                 <input type="text" class="form-input" name="product_name" value="{{ $product->product_name }}" required>
+                @error('product_name')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -43,6 +46,9 @@
                 </select>
                     <span class="dropdown-icon"></span>
                 </div>
+                @error('company_id')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -50,6 +56,9 @@
                     価格<span class="required">*</span>
                 </label>
                 <input type="number" class="form-input" name="price" value="{{ $product->price }}" required>
+                @error('price')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -57,6 +66,9 @@
                     在庫数<span class="required">*</span>
                 </label>
                 <input type="number" class="form-input" name="stock" value="{{ $product->stock }}" required>
+                @error('stock')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -71,7 +83,7 @@
                     商品画像
                 </label>
                 <div class="form-input-wrapper">
-                    <input type="file" id="fileInput" name="Image" accept="image/*">
+                    <input type="file" id="fileInput" name="image" accept="image/*">
                     <label for="fileInput" class="file-select-button">ファイルを選択</label>
                 </div>
             </div>

@@ -12,13 +12,16 @@
     <h1>商品新規登録画面</h1>
     
     <div class="form-container">
-        <form action="{{ route('store') }}" method="POST">
+        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
             <div class="form-group">
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
                 <input type="text" name="product_name" class="form-input" required>
+                @error('product_name')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -32,6 +35,9 @@
                 </option>
                 @endforeach
                 </select>
+                @error('company_id')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -39,6 +45,9 @@
                     価格<span class="required">*</span>
                 </label>
                 <input type="number" name="price" class="form-input" required>
+                @error('price')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -46,6 +55,9 @@
                     在庫数<span class="required">*</span>
                 </label>
                 <input type="number" name="stock" class="form-input" required>
+                @error('stock')
+                <div style="color:red">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -60,7 +72,7 @@
                     商品画像
                 </label>
                 <div class="form-input-wrapper">
-                    <input type="file" id="fileInput" name="Image" accept="image/*">
+                    <input type="file" id="fileInput" name="image" accept="image/*">
                     <label for="fileInput" class="file-select-button">ファイルを選択</label>
                 </div>
             </div>

@@ -133,3 +133,10 @@ h1 {
 input[type="file"] {
     display: none;
 }
+
+.product-image {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}

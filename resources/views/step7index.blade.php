@@ -55,7 +55,7 @@
                 @foreach ($products as $index => $product)
                     <tr style="background-color: {{ $index % 2 == 0 ? '#ccc' : '#fff' }};">
                         <td>{{ $product->id }}</td>
-                        <td>商品画像</td>
+                        <td><img src="{{ asset('storage/' . $product->img_path) }}" class="product-image"></td>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->stock }}</td>
@@ -64,7 +64,7 @@
                         <a href="{{ route('show',$product->id) }}">
                             <button class="button-detail">詳細</button>
                         </a>
-                        <form action="{{ route('destroy', $product->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('destroy', $product->id) }}" method="POST" enctype="multipart/form-data" novalidate>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="button-delete"onclick="return confirm('本当に削除しますか？')">削除</button>
