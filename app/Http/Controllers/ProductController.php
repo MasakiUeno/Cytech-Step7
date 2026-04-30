@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Company;
+use App\Http\Requests\ProductRequest;
 use Exception;
 
 class ProductController extends Controller
@@ -58,24 +59,8 @@ class ProductController extends Controller
     }
     //商品情報編集画面
 
-    public function update(Request $request,$id)
+    public function update(ProductRequest $request,$id)
     {
-        $request->validate([
-            'product_name' => 'required|max:255',
-            'company_id'   => 'required|exists:companies,id',
-            'price'        => 'required|integer|min:0',
-            'stock'        => 'required|integer|min:0',
-            'comment'      => 'nullable|max:1000',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ],[
-            'product_name.required' => '商品名は必須です',
-            'company_id.required'   => 'メーカーを選択してください',
-            'price.required'        => '価格は必須です',
-            'stock.required'        => '在庫数は必須です',
-            'price.integer'         => '価格は数値で入力してください',
-            'stock.integer'         => '在庫数は数値で入力してください',
-        ]);
-
         DB::beginTransaction();
 
         try{
@@ -104,24 +89,8 @@ class ProductController extends Controller
     }
     //editの内容を更新する処理
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'product_name' => 'required|max:255',
-            'company_id'   => 'required|exists:companies,id',
-            'price'        => 'required|integer|min:0',
-            'stock'        => 'required|integer|min:0',
-            'comment'      => 'nullable|max:1000',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ],[
-            'product_name.required' => '商品名は必須です',
-            'company_id.required'   => 'メーカーを選択してください',
-            'price.required'        => '価格は必須です',
-            'stock.required'        => '在庫数は必須です',
-            'price.integer'         => '価格は数値で入力してください',
-            'stock.integer'         => '在庫数は数値で入力してください',
-        ]);
-
         DB::beginTransaction();
 
         try{

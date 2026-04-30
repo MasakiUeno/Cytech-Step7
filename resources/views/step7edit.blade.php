@@ -25,7 +25,7 @@
                 <label class="form-label">
                     商品名<span class="required">*</span>
                 </label>
-                <input type="text" class="form-input" name="product_name" value="{{ $product->product_name }}" required>
+                <input type="text" class="form-input" name="product_name" value="{{ $product->product_name }}">
                 @error('product_name')
                 <div style="color:red">{{ $message }}</div>
                 @enderror
@@ -36,7 +36,7 @@
                     メーカー名<span class="required">*</span>
                 </label>
                 <div class="form-input-wrapper">
-                <select name="company_id" class="form-input" required>
+                <select name="company_id" class="form-input">
                 @foreach ($companies as $company)
                 <option value="{{ $company->id }}"
                 {{ $product->company_id == $company->id ? 'selected' : '' }}>
@@ -55,7 +55,7 @@
                 <label class="form-label">
                     価格<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" name="price" value="{{ $product->price }}" required>
+                <input type="number" class="form-input" name="price" value="{{ $product->price }}">
                 @error('price')
                 <div style="color:red">{{ $message }}</div>
                 @enderror
@@ -65,7 +65,7 @@
                 <label class="form-label">
                     在庫数<span class="required">*</span>
                 </label>
-                <input type="number" class="form-input" name="stock" value="{{ $product->stock }}" required>
+                <input type="number" class="form-input" name="stock" value="{{ $product->stock }}">
                 @error('stock')
                 <div style="color:red">{{ $message }}</div>
                 @enderror
