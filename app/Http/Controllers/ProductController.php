@@ -16,6 +16,14 @@ class ProductController extends Controller
         $keyword = $request->keyword;
         $maker = $request->maker;
 
+        $min_price = $request->min_price;
+        $max_price = $request->max_price;
+        $min_stock = $request->min_stock;
+        $max_stock = $request->max_stock;
+
+        $sort = $request->get('sort', 'id');
+        $direction = $request->get('direction', 'desc');
+
         $query = Product::query();
 
         if(!empty($keyword)){
@@ -26,11 +34,36 @@ class ProductController extends Controller
             $query->where('company_id',$maker);
         }
 
-        $products = $query->paginate(5);
+        if(!empty($min_price)){
+            $query->where('price', '>=', $min_price);
+        }
+
+        if(!empty($max_price)){
+            $query->where('price', '<=', $max_price);
+        }
+
+        if(!empty($min_stock)){
+            $query->where('stock', '>=', $min_stock);
+        }
+
+        if(!empty($max_stock)){
+            $query->where('stock', '<=', $max_stock);
+        }
+
+        $query->orderBy($sort, $direction);
+
+        if ($request->ajax()) {
+            $products = $query->with('company')->get();
+            return response()->json([
+                'products' => $products
+            ]);
+        }
+
+        $products = $query->with('company')->paginate(5);
 
         $companies = Company::all();
 
-        return view('step7index',compact('products','keyword','maker','companies'));
+        return view('step7index',compact('products','keyword','maker','companies','min_price', 'max_price', 'min_stock', 'max_stock'));
     }
     //商品一覧画面
 
@@ -121,7 +154,7 @@ class ProductController extends Controller
     }
     //新規登録更新
 
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         DB::beginTransaction();
 
@@ -130,9 +163,23 @@ class ProductController extends Controller
             $product->delete();
 
             DB::commit();
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'message' => '商品を削除しました'
+                ]);
+            }
+
             return redirect()->route('index')->with('success', '削除しました');
         }catch (Exception $e){
             DB::rollback();
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'error' => '削除に失敗しました'
+                ],500);
+            }
+
             return redirect()->route('index')->with('error', '削除に失敗しました');
         }
     }

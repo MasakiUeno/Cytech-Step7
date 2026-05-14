@@ -23,6 +23,16 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        $action = $this->route()->getActionMethod();
+        if ($action === 'index') {
+            return [
+                'min_price' => 'nullable|integer|min:0',
+                'max_price' => 'nullable|integer|min:0|gte:min_price',
+                'min_stock' => 'nullable|integer|min:0',
+                'max_stock' => 'nullable|integer|min:0|gte:min_stock',
+            ];
+        }
+
         return [
             'product_name' => 'required|max:255',
             'company_id'   => 'required|exists:companies,id',
